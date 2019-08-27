@@ -1,0 +1,84 @@
+﻿@model SQL
+@{
+    ViewBag.Title = "Home Page";
+}
+
+    <div class="container">
+        <h1>SQL Connection Checker</h1>
+        <hr />
+
+        <form method="post" class="form-group">
+
+
+            @Html.LabelFor(x => x.ConnectionString.Username, "UserName")
+            @Html.TextBoxFor(x => x.ConnectionString.Username, new { @class = "form-control" })
+            @Html.LabelFor(x => x.ConnectionString.Password, "Password")
+            @Html.TextBoxFor(x => x.ConnectionString.Password, new { @class = "form-control", @type = "password" })
+            @Html.LabelFor(x => x.ConnectionString.Server, "Server")
+            @Html.TextBoxFor(x => x.ConnectionString.Server, new { @class = "form-control" })
+            @Html.LabelFor(x => x.ConnectionString.TableName)
+            @Html.TextBoxFor(x => x.ConnectionString.TableName, new { @class = "form-control" })
+            @Html.LabelFor(x => x.ConnectionString.AuthenticationType, "Authentication Type")
+            @Html.EnumDropDownListFor(x => x.ConnectionString.AuthenticationType, new { @class = "form-control" })
+
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+
+            <hr />
+            <div class="alert alert-info" role="alert" style="word-wrap: break-word">
+                <h4 class="alert-heading">Connection String generated from values above</h4>
+                @Html.LabelFor(x => x.ConnectionString.FullConnectionString, "Connection String")
+                @Html.DisplayTextFor(x => x.ConnectionString.FullConnectionString)
+            </div>
+            @if (Model.First5Rows.Any())
+            {<div class="alert alert-success">Successful call!</div>
+                <div class="alert alert-light">Sample returned rows</div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            @foreach (var colHeader in Model.First5ColumnNames)
+                            {
+                                <th>@colHeader</th>
+
+                            }
+                        </tr>
+                    </thead>
+                    @for (int i = 0; i < Model.First5Rows.Count; i++)
+                    {
+                        var rowArray = Model.First5Rows[i].Split(',');
+
+                        <tr>
+                            @foreach (var rowItem in rowArray)
+                            {
+                                <td>@rowItem</td>
+
+                            }
+                        </tr>
+                    }
+
+                </table>
+            }
+
+
+        </form>
+
+        <hr />
+        @if (Model.HasError)
+        {
+            <h3>Call returned error:</h3>
+
+            <code>@Model.ErrorMessage</code>
+
+
+
+        }
+
+
+    </div>
+
+
+
+
+
+
