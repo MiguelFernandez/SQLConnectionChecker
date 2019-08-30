@@ -16,6 +16,8 @@
             @Html.TextBoxFor(x => x.ConnectionString.Password, new { @class = "form-control", @type = "password" })
             @Html.LabelFor(x => x.ConnectionString.Server, "Server")
             @Html.TextBoxFor(x => x.ConnectionString.Server, new { @class = "form-control" })
+            @Html.LabelFor(x => x.ConnectionString.InitialCatalog, "InitialCatalog")
+            @Html.TextBoxFor(x => x.ConnectionString.InitialCatalog, new { @class = "form-control" })
             @Html.LabelFor(x => x.ConnectionString.TableName)
             @Html.TextBoxFor(x => x.ConnectionString.TableName, new { @class = "form-control" })
             @Html.LabelFor(x => x.ConnectionString.AuthenticationType, "Authentication Type")
