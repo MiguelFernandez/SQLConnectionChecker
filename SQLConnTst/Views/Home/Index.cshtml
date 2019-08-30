@@ -35,7 +35,7 @@
             </div>
             @if (Model.First5Rows.Any())
             {<div class="alert alert-success">Successful call!</div>
-                <div class="alert alert-light">Sample returned rows</div>
+                <div class="alert alert-light">Sample returned rows for database [@Model.ConnectionString.InitialCatalog] | Table [@Model.ConnectionString.TableName]</div>
                 <table class="table">
                     <thead>
                         <tr>
