@@ -11,7 +11,9 @@ namespace SQLConnTst
         public string Password { get; set; } = "password";
         public string Server { get; set; } = "mferncervsql.database.windows.net";
         public string InitialCatalog { get; set; } = "mifernadb";
-
+        public bool TrustServerCertificate { get; set; }
+        public bool MultipleActiveResultSets { get; set; }
+        public bool Encrypt { get; set; }
         public string TableName { get; set; } = "names";
         public AuthenticationType AuthenticationType { get; set; }
         public string FullConnectionString
@@ -20,11 +22,11 @@ namespace SQLConnTst
             {
                 if (AuthenticationType == AuthenticationType.SQLCredentials)
                 {
-                    return $"Server={Server},1433;Initial Catalog={InitialCatalog};Persist Security Info=False;User ID={Username};Password={Password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;";
+                    return $"Server={Server},1433;Initial Catalog={InitialCatalog};Persist Security Info=False;User ID={Username};Password={Password};MultipleActiveResultSets={MultipleActiveResultSets};Encrypt={Encrypt};TrustServerCertificate={TrustServerCertificate};";
                 }
 
              
-                    return $"Server={Server},1433;Initial Catalog={InitialCatalog};Persist Security Info=False;User ID={Username};Password={Password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Authentication=\"{AuthenticationType.GetDisplayName()}\";";
+                    return $"Server={Server},1433;Initial Catalog={InitialCatalog};Persist Security Info=False;User ID={Username};Password={Password};MultipleActiveResultSets={MultipleActiveResultSets};Encrypt={Encrypt};TrustServerCertificate={TrustServerCertificate};Authentication=\"{AuthenticationType.GetDisplayName()}\";";
             }
         }
     }
